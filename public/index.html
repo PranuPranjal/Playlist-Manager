@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <button id="showButtons">Playlist</button>
+  <div style="display: flex; flex-direction: column;" id="buttonContainer"></div>
+
+  <script>
+    const showButton = document.getElementById('showButtons');
+    const buttonContainer = document.getElementById('buttonContainer');
+
+    showButton.addEventListener('click', () => {
+      fetch('/message')
+        .then(response => response.json())
+        .then(data => {
+          buttonContainer.innerHTML = ''; // Clear previous buttons
+
+          data.forEach(title => {
+            const button = document.createElement('button');
+            button.textContent = title;
+            buttonContainer.appendChild(button);
+          });
+        });
+    });
+  </script>
+</body>
+<!-- <script>
+    document.getElementById('submit').addEventListener('click', () => {
+      fetch('/message')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('message').innerText = data;
+        });
+    });
+  </script> -->
+</html>
